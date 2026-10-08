@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sơ đồ backlink — Indochina Light</title>
+<meta name="description" content="Hai sơ đồ backlink cho indochinalight.com: (1) mô hình TAS 5 tài sản phantom hai tier, 7 link về 4 collection; (2) 08 method trên neocities.org dồn 1 link về collection wabi-sabi. Trình bày theo mẫu sơ đồ ViBIM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   TOKEN — dán nguyên khối từ brand-tokens.css (rule §3: file standalone)
+   ===================================================================== */
+:root{
+  --brand-bg:#FFFFFF; --brand-bg-elev:#F5FAFD; --brand-bg-band:#EAF7FD; --brand-bg-deep:#002E5A;
+  --brand-cyan:#00A1E4; --brand-cyan-soft:rgba(0,161,228,.10); --brand-cyan-line:rgba(0,161,228,.28);
+  --brand-on-cyan:#002E5A;
+  --brand-accent:#0077A8; --brand-accent-hover:#00648F; --brand-accent-active:#005476;
+  --brand-accent-soft:rgba(0,119,168,.10); --brand-accent-line:rgba(0,119,168,.28);
+  --brand-accent-glow:rgba(0,119,168,.30); --brand-accent-select:rgba(0,119,168,.30);
+  --brand-on-accent:#FFFFFF;
+  --brand-navy:#002E5A; --brand-navy-hover:#00254A; --brand-on-navy:#FFFFFF;
+  --brand-navy-muted:#A9C4DA; --brand-navy-link:#00A1E4;
+  --brand-action:#FFE900; --brand-action-hover:#F2DC00; --brand-action-active:#DEC900;
+  --brand-on-action:#002E5A; --brand-action-ring:rgba(0,46,90,.35);
+  --brand-alert:#E60808; --brand-on-alert:#FFFFFF;
+  --brand-text:#333333; --brand-muted:#5A6B7B; --brand-border:#D8E3EA;
+  --brand-radius-sm:4px; --brand-radius-md:8px; --brand-radius-lg:14px; --brand-radius-cta:8px;
+  --brand-heading:'Montserrat','Be Vietnam Pro',system-ui,sans-serif;
+  --brand-body:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;
+  --brand-display:'Montserrat',system-ui,sans-serif;
+  --brand-body-size:17px; --brand-body-lh:1.7;
+  --brand-dur-fast:150ms; --brand-dur-base:200ms; --brand-dur-slow:250ms;
+  --brand-ease:cubic-bezier(.2,0,0,1);
+  --brand-shadow-card:0 10px 26px rgba(0,46,90,.10);
+  --brand-shadow-focus:0 0 0 3px var(--brand-accent-soft);
+  --brand-maxw:1220px; --brand-pad-x:clamp(16px,5vw,48px); --brand-sec-y:clamp(48px,8vw,96px);
+
+  /* -------------------------------------------------------------------
+     TOKEN RIÊNG CỦA SƠ ĐỒ — chấm nhận diện nền tảng. Quy ước giữ nguyên
+     từ 2 sơ đồ backlink cùng ngày: đây là màu thương hiệu của 5 nền tảng,
+     KHÔNG phải màu In Siêu Tốc. Chỉ được làm CHẤM TRÒN 13px cạnh tên —
+     không làm chữ, không làm viền, không làm mảng nền. Để chúng gánh
+     nghĩa là phá hệ 3 vai (§6 anti-pattern). Bỏ hết chấm thì sơ đồ vẫn
+     đọc được 100% vì tên nền tảng đã viết bằng chữ.
+     ------------------------------------------------------------------- */
+  --dg-pinterest:#E60023;
+  --dg-webflow:#4353FF;
+  --dg-behance:#1769FF;
+  --dg-github:#181717;
+  --dg-substack:#FF6719;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--brand-bg); color:var(--brand-text);
+  font-family:var(--brand-body); font-size:var(--brand-body-size); line-height:var(--brand-body-lh);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--brand-accent-select); color:var(--brand-on-accent)}
+
+.skip-link{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--brand-navy); color:var(--brand-on-navy);
+  padding:12px 18px; border-radius:0 0 var(--brand-radius-md) 0; font-weight:600;
+}
+.skip-link:focus{left:0}
+
+:where(a,button,summary):focus-visible{
+  outline:2px solid var(--brand-accent); outline-offset:2px; border-radius:var(--brand-radius-sm);
+}
+
+/* Rộng hơn 1100px của 2 sơ đồ trước: bản này 5 cột ngang, khung 1340 đơn
+   vị. Chữ vẫn bị giới hạn 62ch riêng nên không bị dài quá tầm mắt. */
+/* Trang đã có tiêu đề nên KHÔNG căn giữa theo chiều dọc nữa — nội dung
+   chạy từ trên xuống như trang thường. Bỏ luôn display:flex trên body, nhờ
+   vậy hết cần vá min-width:0 cho flex item (thiếu nó thì .wrap không co
+   xuống dưới bề rộng nội dung, khung cuộn ngang của .canvas mất tác dụng
+   và trang tràn ngang ở 360px — đã đo thấy thật ở bản chỉ-có-hình). */
+.wrap{max-width:1340px; margin:0 auto;
+      padding:clamp(20px,3.5vw,40px) var(--brand-pad-x) clamp(28px,4vw,48px)}
+
+/* ---------- Header ---------- */
+.hd{margin:0 0 clamp(20px,3vw,30px)}
+.eyebrow{
+  font-family:var(--brand-heading); font-size:12px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--brand-accent);
+  margin:0 0 10px;
+}
+.hd h1{
+  font-family:var(--brand-heading); font-weight:800; color:var(--brand-navy);
+  font-size:clamp(23px,3.4vw,33px); line-height:1.22; letter-spacing:-.015em;
+  margin:0; text-wrap:balance;
+}
+.hd h2{
+  font-family:var(--brand-heading); font-weight:700; color:var(--brand-accent);
+  font-size:clamp(16px,2.1vw,21px); line-height:1.3; letter-spacing:-.005em;
+  margin:8px 0 0; text-wrap:balance;
+}
+/* Vạch cyan đặt sau H2 chứ không sau H1: đặt giữa hai tiêu đề thì nó cắt
+   đôi cặp tiêu đề, đọc thành hai khối rời. */
+.hd h2::after{
+  content:""; display:block; width:56px; height:4px; margin-top:14px;
+  background:var(--brand-cyan); border-radius:2px;
+}
+.lede{margin:16px 0 0; max-width:66ch; color:var(--brand-muted); font-size:15.5px; line-height:1.65}
+
+/* ---------- Khung sơ đồ ---------- */
+.canvas{
+  margin:clamp(22px,3vw,32px) 0 0;
+  border:1px solid var(--brand-border); border-radius:var(--brand-radius-lg);
+  background:var(--brand-bg); box-shadow:var(--brand-shadow-card);
+  padding:clamp(14px,2.4vw,26px);
+  overflow-x:auto; overscroll-behavior-x:contain;
+}
+.canvas svg.dg{display:block; width:100%; min-width:1100px; height:auto}
+.scroll-hint{display:none; margin:10px 0 0; font-size:12.5px; color:var(--brand-muted)}
+
+/* =====================================================================
+   STYLE CỦA SƠ ĐỒ — ĐỂ TRONG <style>, KHÔNG viết lên thẻ SVG.
+   Lý do giữ nguyên từ 2 sơ đồ trước: var() đặt trong presentation
+   attribute của SVG (fill="var(--x)") là chỗ WebKit có lỗi đã biết.
+   ===================================================================== */
+.dg .band-top{fill:var(--brand-bg-band)}
+
+/* BA loại cạnh. Hai loại đầu giữ nguyên cặp navy/accent của sơ đồ link
+   tier và link wheel để cả bộ đọc như một ngôn ngữ. Loại thứ ba là mới:
+   internal link nằm TRONG site, khác bản chất backlink, nên tách hẳn
+   bằng nét đứt xám. Mỗi loại khác nhau ở 3 tín hiệu (màu + độ dày +
+   liền/đứt), không chỉ khác màu — WCAG 1.4.1. */
+.dg .edge-back{ stroke:var(--brand-navy);   stroke-width:2.6; fill:none; stroke-linecap:round}
+.dg .edge-chain{stroke:var(--brand-accent); stroke-width:1.9; fill:none; stroke-linecap:round}
+.dg .edge-int{  stroke:var(--brand-muted);  stroke-width:2;   fill:none; stroke-linecap:round; stroke-dasharray:7 5}
+
+.ah-navy{fill:var(--brand-navy)}
+.ah-accent{fill:var(--brand-accent)}
+.ah-muted{fill:var(--brand-muted)}
+
+.dg .node-post{fill:var(--brand-bg);   stroke:var(--brand-navy); stroke-width:1.6}
+.dg .node-main{fill:var(--brand-navy)}
+.dg .node-asset{fill:var(--brand-bg);  stroke:var(--brand-navy); stroke-width:1.6}
+.dg .node-ext{ fill:var(--brand-bg);  stroke:var(--brand-navy); stroke-width:1.6}
+
+.dg text{paint-order:stroke}
+.dg .p-name{  fill:var(--brand-navy);       font-family:var(--brand-heading); font-size:17px;   font-weight:700}
+.dg .p-slug{  fill:var(--brand-muted);      font-family:var(--brand-body);    font-size:11.5px; font-weight:500}
+.dg .m-eye{   fill:var(--brand-navy-muted); font-family:var(--brand-heading); font-size:10px;   font-weight:700; letter-spacing:1.5px}
+.dg .m-name{  fill:var(--brand-on-navy);    font-family:var(--brand-heading); font-size:20px;   font-weight:800}
+.dg .m-slug{  fill:var(--brand-navy-muted); font-family:var(--brand-body);    font-size:11.5px; font-weight:500}
+.dg .a-name{  fill:var(--brand-navy);       font-family:var(--brand-heading); font-size:17px;   font-weight:700}
+.dg .a-dom{   fill:var(--brand-muted);      font-family:var(--brand-body);    font-size:12px;   font-weight:500}
+/* Viên nhãn DR trong ô tài sản. Cùng công thức với .vb-badge của mục 2 nhưng
+   để class RIÊNG vì tiền tố vb- là của mục 2. Từ V25 thì CẢ HAI MỤC đều gọi
+   cặp class này — cả hai svg cùng mang class dg nên không phải khai lại.
+   Mục 1 đặt nhãn ở hàng TRÊN (ô chỉ 2 dòng, hàng trên còn chỗ); mục 2 đặt ở
+   hàng META vì hàng trên đã có .vb-badge chiếm góc phải. */
+.dg .dr-badge{fill:var(--brand-bg);         stroke:var(--brand-border); stroke-width:1}
+.dg .dr-tx{   fill:var(--brand-muted);      font-family:var(--brand-heading); font-size:10px;   font-weight:700}
+.dg .e-eye{   fill:var(--brand-accent);     font-family:var(--brand-heading); font-size:10px;   font-weight:700; letter-spacing:1.4px}
+.dg .x-name{  fill:var(--brand-navy);       font-family:var(--brand-heading); font-size:14px;   font-weight:700}
+.dg .e-sub{   fill:var(--brand-muted);      font-family:var(--brand-body);    font-size:11px;   font-weight:500}
+.dg .lb-tier{ fill:var(--brand-accent);     font-family:var(--brand-heading); font-size:11.5px; font-weight:700; letter-spacing:1.3px}
+.dg .lb-sub{  fill:var(--brand-muted);      font-family:var(--brand-body);    font-size:11px;   font-weight:500}
+
+/* Khung gộp + vạch chia tier của mô hình TAS ở mục 1. Cố ý KHÔNG dùng lại
+   .vb-group / .vb-div của mục 2: hai mục phải sửa được độc lập. */
+.dg .grp-band{fill:var(--brand-bg-elev); stroke:var(--brand-border); stroke-width:1.4}
+.dg .tier-div{stroke:var(--brand-border); stroke-width:1; stroke-dasharray:3 5}
+.dg .grp-tx{  fill:var(--brand-muted);      font-family:var(--brand-heading); font-size:10.5px; font-weight:700; letter-spacing:1.2px}
+
+.dg .dot-pinterest{fill:var(--dg-pinterest)}
+.dg .dot-webflow{fill:var(--dg-webflow)}
+.dg .dot-behance{fill:var(--dg-behance)}
+.dg .dot-github{fill:var(--dg-github)}
+.dg .dot-substack{fill:var(--dg-substack)}
+
+/* ---------- Legend ---------- */
+.legend{
+  list-style:none; margin:22px 0 0; padding:0;
+  display:grid; gap:10px 20px; grid-template-columns:repeat(auto-fit,minmax(246px,1fr));
+}
+.legend li{display:flex; align-items:center; gap:11px; font-size:14px; color:var(--brand-text)}
+.legend svg{flex:0 0 auto}
+.legend b{font-weight:600; color:var(--brand-navy)}
+.lg-back{ stroke:var(--brand-navy);   stroke-width:2.6; stroke-linecap:round; fill:none}
+.lg-chain{stroke:var(--brand-accent); stroke-width:1.9; stroke-linecap:round; fill:none}
+.lg-int{  stroke:var(--brand-muted);  stroke-width:2;   stroke-linecap:round; stroke-dasharray:7 5; fill:none}
+.lg-main{ fill:var(--brand-navy)}
+
+/* ---------- Note ---------- */
+.note{
+  margin:clamp(26px,4vw,38px) 0 0; padding:20px 22px;
+  background:var(--brand-bg-band); border-left:4px solid var(--brand-accent);
+  border-radius:0 var(--brand-radius-md) var(--brand-radius-md) 0;
+  max-width:92ch;
+}
+.note--warn{border-left-color:var(--brand-alert)}
+.note h2, .note h3{
+  font-family:var(--brand-heading); font-size:15px; font-weight:700; letter-spacing:.02em;
+  color:var(--brand-navy); margin:0 0 10px; text-transform:uppercase;
+}
+.note ul{margin:0; padding-left:20px; font-size:14.5px; line-height:1.7; color:var(--brand-text)}
+.note li+li{margin-top:8px}
+code{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:13px;
+  background:var(--brand-bg); border:1px solid var(--brand-border);
+  border-radius:var(--brand-radius-sm); padding:1px 6px; color:var(--brand-accent-active);
+  overflow-wrap:anywhere;
+}
+
+/* ---------- Bản text của sơ đồ (a11y + copy sang doc) ---------- */
+.alt{margin:26px 0 0; border-top:1px solid var(--brand-border); padding-top:14px; max-width:92ch}
+.alt summary{
+  cursor:pointer; font-family:var(--brand-heading); font-weight:700; font-size:14.5px;
+  color:var(--brand-accent); list-style:none; display:flex; align-items:center; gap:9px;
+  padding:12px 0; min-height:44px;
+}
+.alt summary::-webkit-details-marker{display:none}
+.alt summary::before{content:"▸"; display:inline-block; transition:transform var(--brand-dur-base) var(--brand-ease)}
+.alt[open] summary::before{transform:rotate(90deg)}
+.alt ul{margin:4px 0 0; padding-left:22px; font-size:14.5px; line-height:1.7; color:var(--brand-text)}
+.alt ul ul{margin-top:4px}
+.alt li{margin-bottom:3px}
+
+/* ---------- Khối sơ đồ thứ hai ---------- */
+.sec{margin:clamp(34px,5vw,54px) 0 0}
+.sec h3{
+  font-family:var(--brand-heading); font-weight:800; color:var(--brand-navy);
+  font-size:clamp(18px,2.4vw,24px); line-height:1.25; margin:0; letter-spacing:-.01em;
+}
+.sec h3::after{
+  content:""; display:block; width:40px; height:3px; margin-top:12px;
+  background:var(--brand-cyan); border-radius:2px;
+}
+.dg .method-tag{fill:var(--brand-accent); font-family:var(--brand-heading); font-size:17px; font-weight:800; letter-spacing:1.2px}
+.dg .hub-ring{fill:none; stroke:var(--brand-accent); stroke-width:1.8; stroke-dasharray:8 6}
+.dg .w-name{fill:var(--brand-navy);  font-family:var(--brand-heading); font-size:15px;   font-weight:700}
+.dg .w-sub{ fill:var(--brand-muted); font-family:var(--brand-body);    font-size:11.5px; font-weight:500}
+
+footer.ft{
+  margin:clamp(34px,5vw,52px) 0 0; padding-top:18px; border-top:1px solid var(--brand-border);
+  font-size:12.5px; color:var(--brand-muted); line-height:1.6;
+}
+
+@media (max-width:980px){ .scroll-hint{display:block} }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important; animation-duration:.01ms !important}
+}
+@media print{
+  body{background:var(--brand-bg)}
+  .canvas{box-shadow:none; break-inside:avoid; overflow:visible}
+  .canvas svg.dg{min-width:0}
+  .alt[open] summary::before{transform:none}
+}
+/* =====================================================================
+   MỤC 2 — ViBIM. Dùng lại hệ thị giác của trang chứ không bê màu brand
+   ViBIM sang: cả hai cùng đặt token trên --brand-* nên trộn vào là mục 1
+   bị ghi đè. Ba kiểu nét có sẵn ánh xạ đúng ba loại link của ViBIM:
+   navy đậm liền = link về money · accent mảnh = link stack · xám đứt = GSA.
+   Mọi class mới mang tiền tố vb- để không đụng class của mục 1.
+   ===================================================================== */
+:root{ --dg-cloudflare:#F38020; --dg-wordpress:#21759B; --dg-archidiary:#023958 }
+
+.sec--top{ margin-top:0 }
+.sec h2{ font-family:var(--brand-heading); font-weight:800; color:var(--brand-navy);
+  font-size:clamp(20px,2.8vw,27px); line-height:1.25; margin:0; letter-spacing:-.01em }
+.sec h2::after{ content:""; display:block; width:40px; height:3px; margin-top:12px;
+  background:var(--brand-cyan); border-radius:2px }
+
+.dg .vb-box{ fill:var(--brand-bg); stroke:var(--brand-navy); stroke-width:1.6 }
+.dg .vb-box--money{ fill:var(--brand-bg-band); stroke:var(--brand-accent) }
+.dg .vb-box--src{ fill:var(--brand-bg-elev); stroke:var(--brand-muted); stroke-dasharray:5 4 }
+.dg .vb-box--warn{ stroke:var(--brand-alert); stroke-dasharray:6 4 }
+.dg .vb-group{ fill:var(--brand-bg-elev); stroke:var(--brand-border); stroke-width:1.4 }
+.dg .vb-div{ stroke:var(--brand-border); stroke-width:1; stroke-dasharray:3 5 }
+.dg .vb-name{ fill:var(--brand-navy);  font-family:var(--brand-heading); font-size:15px;   font-weight:700 }
+.dg .vb-url{ fill:var(--brand-accent); font-family:var(--brand-body);    font-size:12px;   font-weight:500 }
+.dg .vb-meta{ fill:var(--brand-muted); font-family:var(--brand-body);    font-size:11.5px; font-weight:500 }
+.dg .vb-mname{ fill:var(--brand-navy); font-family:var(--brand-heading); font-size:13px;   font-weight:700 }
+.dg .vb-badge{ fill:var(--brand-bg); stroke:var(--brand-border); stroke-width:1 }
+.dg .vb-badge-tx{ fill:var(--brand-muted); font-family:var(--brand-heading); font-size:10px; font-weight:700 }
+.dg .vb-warn{ fill:var(--brand-alert); stroke:none }
+.dg .vb-warn-tx{ fill:var(--brand-on-alert); font-family:var(--brand-heading); font-size:10px; font-weight:700 }
+.dg .vb-grp-tx{ fill:var(--brand-muted); font-family:var(--brand-heading); font-size:10.5px; font-weight:700; letter-spacing:1.2px }
+.dg .vb-f-navy{ fill:var(--brand-navy) }
+.dg .vb-f-accent{ fill:var(--brand-accent) }
+.dg .vb-f-muted{ fill:var(--brand-muted) }
+.dg .dot-cloudflare{ fill:var(--dg-cloudflare) }
+.dg .dot-wordpress{ fill:var(--dg-wordpress) }
+.dg .dot-archidiary{ fill:var(--dg-archidiary) }
+.lg-warn{ fill:none; stroke:var(--brand-alert); stroke-width:1.6; stroke-dasharray:5 3 }
+
+
+
+/* Indochina Light — thêm cho sơ đồ này */
+:root{ --dg-cloudflare:#F38020; --dg-github:#181717; --dg-site123:#1A73E8; --dg-gamma:#7C3AED; --dg-ghost:#15171A; --dg-wiki:#636466 }
+.dg .dot-site123{ fill:var(--dg-site123) } .dg .dot-gamma{ fill:var(--dg-gamma) } .dg .dot-ghost{ fill:var(--dg-ghost) } .dg .dot-wiki{ fill:var(--dg-wiki) }
+.dg .vb-box--seed{ fill:var(--brand-bg); stroke:#82b366; stroke-width:1.6; stroke-dasharray:3 3 }
+.dg .edge-seed{ stroke:#82b366; stroke-width:2; fill:none; stroke-dasharray:2 4; stroke-linecap:round }
+.lg-seed{ stroke:#82b366; stroke-width:2; stroke-dasharray:2 4 }
+.dg .vb-mmeta{ fill:var(--brand-muted); font-family:var(--brand-body); font-size:10.5px; font-weight:500 }
+
+.dg .vb-box--bao{ fill:#F7F2FB; stroke:#9673a6; stroke-width:1.6; stroke-dasharray:6 4 }
+.dg .edge-bao{ stroke:#9673a6; stroke-width:2.2; fill:none; stroke-linecap:round }
+.dg .dot-neo{ fill:#E44D26 }
+.lg-bao{ stroke:#9673a6; stroke-width:2.2 }
+.dg .vb-ring-tx{ fill:var(--brand-accent); font-family:var(--brand-heading); font-size:11px; font-weight:700; letter-spacing:1px }
+.dg .vb-edge-tx{ fill:var(--brand-navy); font-family:var(--brand-body); font-size:11px; font-weight:600 }
+.dg .vb-pick{ fill:var(--brand-bg-band); stroke:var(--brand-accent-line); stroke-width:1 }
+.notes3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:20px }
+.notes3 .note{ margin:0 } .notes3 .note li{ font-size:13.5px } .notes3 .note h3{ font-size:15px; line-height:1.35 }
+.dg8 .vb-name{ font-size:16px } .dg8 .vb-meta{ font-size:12px } .dg8 .lb-sub{ font-size:12px } .dg8 .vb-mmeta{ font-size:11.5px } .dg8 .vb-edge-tx{ font-size:12px } .dg8 .vb-ring-tx{ font-size:12px }
+@media (max-width:900px){ .notes3{ grid-template-columns:1fr } }
+
+.dg .vb-pk{ fill:var(--brand-navy); font-family:var(--brand-body); font-size:11.5px; font-weight:600 }
+.dg .vb-box--gp{ fill:#FFFBEB; stroke:#B45309; stroke-width:1.8 }
+.dg .edge-gp{ stroke:#B45309; stroke-width:2.2; fill:none; stroke-linecap:round }
+.dg .vb-sn{ fill:var(--brand-navy); font-family:var(--brand-heading); font-size:13px; font-weight:700 }
+.dg .vb-cnt{ fill:var(--brand-accent); font-family:var(--brand-heading); font-size:11px; font-weight:700 }
+.dg .vb-foot{ fill:var(--brand-muted); font-family:var(--brand-body); font-size:10.5px; font-weight:500 }
+.dg .vb-box--amber{ stroke:#D97706; stroke-dasharray:6 4 }
+.dg .vb-ss{ fill:var(--brand-muted); font-family:var(--brand-body); font-size:10.5px; font-weight:500 }
+.dg .vb-box--social{ fill:#FFF7ED; stroke:#C2410C; stroke-width:1.6; stroke-dasharray:4 4 }
+.dg .edge-social{ stroke:#C2410C; stroke-width:2; fill:none; stroke-dasharray:4 4; stroke-linecap:round }
+.lg-social{ stroke:#C2410C; stroke-width:2; stroke-dasharray:4 4 }
+.dg .vb-box--gsa{ fill:#FDF2F2; stroke:#b85450; stroke-width:1.8; stroke-dasharray:6 4 }
+.dg .edge-gsa{ stroke:#b85450; stroke-width:2; fill:none; stroke-dasharray:6 4; stroke-linecap:round }
+.lg-gsa{ stroke:#b85450; stroke-width:2; stroke-dasharray:6 4 }
+.lg-gp{ stroke:#B45309; stroke-width:2.2 }
+.dg .dot-sk{ fill:#00A88E } .dg .dot-gsites{ fill:#7248B9 } .dg .dot-sqsp{ fill:#111111 }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hd">
+    <h1>Sơ đồ backlink — Indochina Light</h1>
+  </header>
+  <section class="sec sec--top" id="so-do-indochinalight">
+    <h2>1. Mô hình TAS nhiều URL</h2>
+    <div class="canvas">
+<svg class="dg" viewBox="0 -52 1240 1010" role="img" aria-labelledby="il-title il-desc">
+<title id="il-title">Mô hình TAS — sơ đồ link stack hai tier cho Indochina Light</title>
+<desc id="il-desc">Tầng đích 4 collection của indochinalight.com và seed Wikipedia. Hệ phantom 5 tài sản: Tier 1 Cloudflare tool, GitHub Pages, Strikingly (site brand có sẵn); Tier 2 Google Sites, Squarespace. Mỗi tài sản ghi phantom keyword, DR nền tảng và traffic nền. Google Sites không trỏ money, chỉ nuôi Cloudflare và GitHub. Tầng đẩy: mỗi tài sản ẩn danh (Cloudflare, GitHub, Google Sites) nhận riêng một cụm Blog 2.0 và một cụm GSA; 2 tài sản brand không nhận Blog 2.0; Squarespace nhận social brand (Pinterest, YouTube) đẩy index + 1 guest post.</desc>
+<defs>
+<marker id="vb-ah-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.4" markerHeight="5.4" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-navy"/></marker>
+<marker id="vb-ah-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-accent"/></marker>
+<marker id="vb-ah-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-muted"/></marker>
+<marker id="vb-ah-gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" fill="#B45309"/></marker>
+<marker id="vb-ah-social" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" fill="#C2410C"/></marker>
+<marker id="vb-ah-gsa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" fill="#b85450"/></marker>
+<marker id="vb-ah-seed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" fill="#82b366"/></marker>
+</defs>
+<text class="method-tag" x="14" y="-24">MÔ HÌNH TAS</text>
+<text class="lb-sub" x="14" y="-6">5 tài sản phantom · 2 tier · tầng đẩy riêng cho 3 tài sản ẩn danh</text>
+<rect class="vb-group" x="170" y="228" width="1062" height="432" rx="14"/>
+<line class="vb-div" x1="170" y1="200" x2="1232" y2="200"/>
+<line class="vb-div" x1="186" y1="445" x2="1216" y2="445"/>
+<line class="vb-div" x1="170" y1="694" x2="1232" y2="694"/>
+<line class="vb-div" x1="170" y1="800" x2="1232" y2="800"/>
+<text class="vb-grp-tx" x="1216" y="650" text-anchor="end">HỆ PHANTOM · 5 TÀI SẢN</text>
+<text class="lb-tier" x="16" y="74">TẦNG ĐÍCH</text><text class="lb-sub" x="16" y="94">money site · 4 + seed</text>
+<text class="lb-tier" x="16" y="314">TIER 1</text><text class="lb-sub" x="16" y="334">trỏ thẳng · 3</text>
+<text class="lb-tier" x="16" y="564">TIER 2</text><text class="lb-sub" x="16" y="584">nuôi tier 1 · 2</text>
+<text class="lb-tier" x="16" y="740">NGUỒN ĐẨY</text><text class="lb-sub" x="16" y="760">tier 2 · 4 box</text>
+<text class="lb-tier" x="16" y="846">NGUỒN ĐẨY</text><text class="lb-sub" x="16" y="866">tier 1 · 4 box</text>
+<path class="edge-back" d="M300,250 C300,190 420,204 420,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M420,250 C420,190 610,204 610,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M740,250 C740,190 850,204 850,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M810,250 C810,190 1060,204 1060,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M1060,250 C1060,190 740,204 740,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M960,250 C960,190 520,204 520,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-back" d="M885,500 L885,212 C885,178 930,186 930,144" marker-end="url(#vb-ah-navy)"/>
+<path class="edge-chain" d="M480,320.0 L550,320.0" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-chain" d="M920,320.0 L850,320.0" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-chain" d="M430,500 C430,450 400,440 400,390" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-chain" d="M600,500 C600,450 620,440 620,390" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-chain" d="M790,500 C790,450 760,440 760,390" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-chain" d="M960,500 C960,450 1000,440 1000,390" marker-end="url(#vb-ah-accent)"/>
+<path class="edge-int" d="M455,712 V640" marker-end="url(#vb-ah-muted)"/>
+<path class="edge-gsa" d="M605,712 V640" marker-end="url(#vb-ah-gsa)"/>
+<path class="edge-social" d="M830,712 V640" marker-end="url(#vb-ah-social)"/>
+<path class="edge-gp" d="M980,712 V640" marker-end="url(#vb-ah-gp)"/>
+<path class="edge-int" d="M250,818 V390" marker-end="url(#vb-ah-muted)"/>
+<path class="edge-gsa" d="M400,818 V800 Q400,792 392,792 H348 Q340,792 340,784 V390" marker-end="url(#vb-ah-gsa)"/>
+<path class="edge-int" d="M685,818 V390" marker-end="url(#vb-ah-muted)"/>
+<path class="edge-gsa" d="M835,818 V800 Q835,792 827,792 H723 Q715,792 715,784 V390" marker-end="url(#vb-ah-gsa)"/>
+<path class="edge-seed" d="M330,92 L345,92" marker-end="url(#vb-ah-seed)"/>
+<g><rect class="vb-box vb-box--seed" x="180" y="40" width="150" height="104" rx="10"/><circle class="dot-wiki" cx="198" cy="66" r="5.5"/><text class="vb-mname" x="210" y="71">Wikipedia</text><text class="vb-mmeta" x="192" y="96">bài “LED lamp” · seed</text><text class="vb-mmeta" x="192" y="112">nofollow · có sẵn</text><text class="vb-mmeta" x="192" y="128">giữ nguyên</text></g>
+<g><rect class="vb-box vb-box--money" x="345" y="40" width="210" height="104" rx="10"/>
+<text class="vb-mname" x="359" y="72">/collections/rattan-</text>
+<text class="vb-mname" x="359" y="89">pendant-lights/ (pillar)</text>
+<text class="vb-meta" x="359" y="122">indochinalight.com · 3 link vào</text>
+<text class="vb-mmeta" x="359" y="137">2 link money + seed</text>
+</g>
+<g><rect class="vb-box vb-box--money" x="570" y="40" width="210" height="104" rx="10"/>
+<text class="vb-mname" x="584" y="72">/collections/rattan-pendant-</text>
+<text class="vb-mname" x="584" y="89">lights-for-kitchen-island/</text>
+<text class="vb-meta" x="584" y="122">indochinalight.com · 2 link vào</text>
+</g>
+<g><rect class="vb-box vb-box--money" x="795" y="40" width="210" height="104" rx="10"/>
+<text class="vb-mname" x="809" y="72">/collections/drum-</text>
+<text class="vb-mname" x="809" y="89">rattan-pendant-lights/</text>
+<text class="vb-meta" x="809" y="122">indochinalight.com · 2 link vào</text>
+</g>
+<g><rect class="vb-box vb-box--money" x="1020" y="40" width="210" height="104" rx="10"/>
+<text class="vb-mname" x="1034" y="72">/collections/wabi-</text>
+<text class="vb-mname" x="1034" y="89">sabi-pendant-lights/</text>
+<text class="vb-meta" x="1034" y="122">indochinalight.com · 1 link vào</text>
+<text class="vb-mmeta" x="1034" y="137">+ mô hình 08 method riêng</text>
+</g>
+<g><rect class="vb-box" x="180" y="250" width="300" height="140" rx="10"/>
+<circle class="dot-cloudflare" cx="202" cy="279" r="5.5"/><text class="vb-name" x="216" y="284">Cloudflare</text>
+<text class="vb-url" x="196" y="306">kitchen-island-calculator.pages.dev</text>
+<text class="vb-pk" x="196" y="330">PK: kitchen island pendant light size</text>
+<text class="vb-foot" x="196" y="376">traffic nền 3,5 tr · dofollow ✓ · PSL</text>
+<rect class="dr-badge" x="392" y="362" width="76" height="20" rx="10"/><text class="dr-tx" x="430" y="376" text-anchor="middle">DR nền 93</text>
+<rect class="vb-badge" x="366" y="263" width="102" height="20" rx="10"/><text class="vb-badge-tx" x="417.0" y="277" text-anchor="middle">ẩn danh · tool</text>
+</g>
+<g><rect class="vb-box" x="550" y="250" width="300" height="140" rx="10"/>
+<circle class="dot-github" cx="572" cy="279" r="5.5"/><text class="vb-name" x="586" y="284">GitHub Pages</text>
+<text class="vb-url" x="566" y="306">rattan-light-care.github.io</text>
+<text class="vb-pk" x="566" y="330">PK: rattan lamp shade turning yellow</text>
+<text class="vb-foot" x="566" y="376">traffic nền 9 tr · dofollow ✓ · PSL</text>
+<rect class="dr-badge" x="762" y="362" width="76" height="20" rx="10"/><text class="dr-tx" x="800" y="376" text-anchor="middle">DR nền 94</text>
+<rect class="vb-badge" x="736" y="263" width="102" height="20" rx="10"/><text class="vb-badge-tx" x="787.0" y="277" text-anchor="middle">ẩn danh</text>
+</g>
+<g><rect class="vb-box vb-box--amber" x="920" y="250" width="300" height="140" rx="10"/>
+<circle class="dot-sk" cx="942" cy="279" r="5.5"/><text class="vb-name" x="956" y="284">Strikingly</text>
+<text class="vb-url" x="936" y="306">bamboopendantlightindochina</text>
+<text class="vb-url" x="936" y="322">.mystrikingly.com · bài blog mới</text>
+<text class="vb-pk" x="936" y="346">PK: bamboo pendant height over kitchen island</text>
+<text class="vb-foot" x="936" y="376">site có sẵn · 22 link ra ⚠ · dofollow ✓</text>
+<rect class="dr-badge" x="1132" y="362" width="76" height="20" rx="10"/><text class="dr-tx" x="1170" y="376" text-anchor="middle">DR nền 89</text>
+<rect class="vb-badge" x="1116" y="263" width="92" height="20" rx="10"/><text class="vb-badge-tx" x="1162.0" y="277" text-anchor="middle">IndochinaLight</text>
+</g>
+<g><rect class="vb-box" x="365" y="500" width="300" height="140" rx="10"/>
+<circle class="dot-gsites" cx="387" cy="529" r="5.5"/><text class="vb-name" x="401" y="534">Google Sites</text>
+<text class="vb-url" x="381" y="556">sites.google.com/view/</text>
+<text class="vb-url" x="381" y="572">rattan-pendant-size-guide</text>
+<text class="vb-pk" x="381" y="596">PK: rattan pendant size for dining table</text>
+<text class="vb-foot" x="381" y="626">traffic nền 48 tr · dofollow ✓</text>
+<rect class="dr-badge" x="577" y="612" width="76" height="20" rx="10"/><text class="dr-tx" x="615" y="626" text-anchor="middle">DR nền 100</text>
+<rect class="vb-badge" x="551" y="513" width="102" height="20" rx="10"/><text class="vb-badge-tx" x="602.0" y="527" text-anchor="middle">ẩn danh</text>
+</g>
+<g><rect class="vb-box" x="735" y="500" width="300" height="140" rx="10"/>
+<circle class="dot-sqsp" cx="757" cy="529" r="5.5"/><text class="vb-name" x="771" y="534">Squarespace</text>
+<text class="vb-url" x="751" y="556">handwoven-light-notes.squarespace.com</text>
+<text class="vb-pk" x="751" y="580">PK: vietnamese handwoven rattan lamps</text>
+<text class="vb-foot" x="751" y="626">nền 3,6 tr · dofollow ✓ · trả phí</text>
+<rect class="dr-badge" x="947" y="612" width="76" height="20" rx="10"/><text class="dr-tx" x="985" y="626" text-anchor="middle">DR nền 96</text>
+<rect class="vb-badge" x="931" y="513" width="92" height="20" rx="10"/><text class="vb-badge-tx" x="977.0" y="527" text-anchor="middle">IndochinaLight</text>
+</g>
+<g><rect class="vb-box vb-box--src" x="385" y="712" width="140" height="56" rx="10"/><text class="vb-sn" x="397" y="735">Blog 2.0</text><text class="vb-cnt" x="513" y="735" text-anchor="end">100 link</text><text class="vb-ss" x="397" y="754">đẩy Google Sites</text></g>
+<g><rect class="vb-box vb-box--gsa" x="535" y="712" width="140" height="56" rx="10"/><text class="vb-sn" x="547" y="735">GSA</text><text class="vb-cnt" x="663" y="735" text-anchor="end">⏳ link</text><text class="vb-ss" x="547" y="754">đẩy Google Sites</text></g>
+<g><rect class="vb-box vb-box--social" x="760" y="712" width="140" height="56" rx="10"/><text class="vb-sn" x="772" y="735">Social brand</text><text class="vb-ss" x="772" y="754">Pinterest · YouTube</text></g>
+<g><rect class="vb-box vb-box--gp" x="910" y="712" width="140" height="56" rx="10"/><text class="vb-sn" x="922" y="735">Guest post</text><text class="vb-cnt" x="1038" y="735" text-anchor="end">1 link</text><text class="vb-ss" x="922" y="754">blog decor US</text></g>
+<g><rect class="vb-box vb-box--src" x="180" y="818" width="140" height="56" rx="10"/><text class="vb-sn" x="192" y="841">Blog 2.0</text><text class="vb-cnt" x="308" y="841" text-anchor="end">100 link</text><text class="vb-ss" x="192" y="860">đẩy Cloudflare</text></g>
+<g><rect class="vb-box vb-box--gsa" x="330" y="818" width="140" height="56" rx="10"/><text class="vb-sn" x="342" y="841">GSA</text><text class="vb-cnt" x="458" y="841" text-anchor="end">⏳ link</text><text class="vb-ss" x="342" y="860">đẩy Cloudflare</text></g>
+<g><rect class="vb-box vb-box--src" x="615" y="818" width="140" height="56" rx="10"/><text class="vb-sn" x="627" y="841">Blog 2.0</text><text class="vb-cnt" x="743" y="841" text-anchor="end">100 link</text><text class="vb-ss" x="627" y="860">đẩy GitHub</text></g>
+<g><rect class="vb-box vb-box--gsa" x="765" y="818" width="140" height="56" rx="10"/><text class="vb-sn" x="777" y="841">GSA</text><text class="vb-cnt" x="893" y="841" text-anchor="end">⏳ link</text><text class="vb-ss" x="777" y="860">đẩy GitHub</text></g>
+</svg>
+    </div>
+    <p class="scroll-hint">↔ Cuộn ngang để xem hết sơ đồ.</p>
+    <ul class="legend"><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-back" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#002E5A"/></svg><span><b>Link về money site</b> — 7 link, trỏ thẳng vào indochinalight.com · mỗi tài sản ≤ 2 link money</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-chain" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#0077A8"/></svg><span><b>Link stack</b> — 6 link, phantom nuôi phantom (chuỗi Tier 1 hội tụ về GitHub)</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-int" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#5A6B7B"/></svg><span><b>Nguồn đẩy Blog 2.0</b> — 100 link vào mỗi tài sản ẩn danh, tổng 300 link</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-gsa" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#b85450"/></svg><span><b>GSA</b> — 1 cụm vào mỗi tài sản ẩn danh (Cloudflare, GitHub, Google Sites) · số link chưa chốt (⏳)</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-gp" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#B45309"/></svg><span><b>Guest post / niche edit</b> — 1 link vào Squarespace · blog home-decor US, DR 30–50, có traffic</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-social" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#C2410C"/></svg><span><b>Social brand</b> — Pinterest + YouTube của IndochinaLight → Squarespace, đẩy index</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-seed" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#82b366"/></svg><span><b>Seed có sẵn</b> — Wikipedia → pillar, nofollow</span></li></ul>
+  </section>
+  <section class="sec" id="so-do-08-method">
+    <h2>2. Mô hình 08 method → wabi-sabi</h2>
+    <div class="canvas">
+<svg class="dg dg8" viewBox="14 0 1576 870" role="img" aria-labelledby="w8-title w8-desc">
+<title id="w8-title">Mô hình 08 method — vòng neocities.org dồn cho collection wabi-sabi</title>
+<desc id="w8-desc">Vòng 4 nút trên cùng tên miền gốc neocities.org đặt ở 4 góc, nối vòng 1 → 2 → 3 → 4 → 1 và cùng trỏ vào nút giữa ở tâm. Nút giữa đặt đúng 1 link về /collections/wabi-sabi-pendant-lights bên phải. Bên trái: PBN, 150 link profile, bài báo buffer, GSA; bên phải: 2 nguồn blog comment.</desc>
+<defs>
+<marker id="w8-ah-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.4" markerHeight="5.4" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-navy"/></marker>
+<marker id="w8-ah-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-accent"/></marker>
+<marker id="w8-ah-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" class="vb-f-muted"/></marker>
+<marker id="w8-ah-bao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 Z" fill="#9673a6"/></marker>
+</defs>
+<text class="method-tag" x="30" y="42">MÔ HÌNH A: 08 METHOD CHUẨN HÓA</text>
+<text class="lb-sub" x="30" y="62">dồn cho /collections/wabi-sabi-pendant-lights · NỘI BỘ — grey hat</text>
+<rect class="vb-pick" x="290.0" y="87.0" width="734.0" height="44.0" rx="10"/>
+<text class="vb-name" x="304" y="106"><tspan>Chọn neocities.org</tspan></text>
+<text class="vb-meta" x="470" y="106">454K traffic, tăng 33% · miễn phí · HTML tĩnh toàn quyền · không thuộc PSL</text>
+<text class="vb-url" x="304" y="123">Tham khảo: silvallyplushie.neocities.org/cats</text>
+<rect class="vb-group" x="295.0" y="182.5" width="820.0" height="666.0" rx="16"/>
+<text class="vb-ring-tx" x="705" y="206" text-anchor="middle">VÒNG 08 · CÙNG MỘT TÊN MIỀN GỐC NEOCITIES.ORG</text>
+<text class="lb-sub" x="705" y="224" text-anchor="middle">mỗi nút = website thật 10–20 bài · link giữa nút: HTML hoặc embed</text>
+<rect class="vb-group" x="1188.0" y="399.0" width="389.0" height="233.0" rx="14"/>
+<text class="vb-grp-tx" x="1382" y="423" text-anchor="middle">INDOCHINALIGHT.COM</text>
+<path class="edge-chain" d="M610.0,288.0 L790.0,288.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M935.0,336.0 L935.0,700.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M790.0,748.0 L610.0,748.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M465.0,700.0 L465.0,336.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M513.6,336.0 L639.2,460.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M886.4,336.0 L760.8,460.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M885.5,700.0 L761.8,580.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-chain" d="M514.5,700.0 L638.2,580.0" marker-end="url(#w8-ah-accent)"/>
+<path class="edge-back" d="M855.0,520.0 L1220.0,520.0" marker-end="url(#w8-ah-navy)"/>
+<text class="vb-edge-tx" x="1038" y="494" text-anchor="middle">1 link duy nhất · thân bài · dofollow</text>
+<text class="vb-meta" x="1038" y="510" text-anchor="middle">anchor “wabi-sabi rattan pendant lights”</text>
+<path class="edge-int" d="M260.0,287.4 L320.0,287.5" marker-end="url(#w8-ah-muted)"/>
+<path class="edge-int" d="M260.0,747.4 L320.0,747.5" marker-end="url(#w8-ah-muted)"/>
+<path class="edge-int" d="M1170.0,764.7 L1080.0,758.3" marker-end="url(#w8-ah-muted)"/>
+<path class="edge-int" d="M440.0,515.5 L545.0,520.0" marker-end="url(#w8-ah-muted)"/>
+<path class="edge-int" d="M1238.0,200.0 L1079.7,277.6" marker-end="url(#w8-ah-muted)"/>
+<path class="edge-bao" d="M436.5,588.5 L545.0,560.3" marker-end="url(#w8-ah-bao)"/>
+<rect class="vb-box" x="320.0" y="240.0" width="290.0" height="96.0" rx="10"/><circle class="dot-neo" cx="340.0" cy="265.0" r="5.5"/>
+<text class="vb-name" x="353" y="270">Neocities</text>
+<rect class="vb-badge" x="488" y="251" width="110" height="20" rx="10"/><text class="vb-badge-tx" x="543" y="265" text-anchor="middle">T2 · out 2/3</text>
+<text class="vb-url" x="334" y="292">wabi-sabi-rattan-lights.neocities.org</text>
+<text class="vb-meta" x="334" y="312">rattan / wicker fixture · hanging · ceiling</text>
+<text class="vb-meta" x="334" y="328">(10 từ ở vị trí 6–16)</text>
+<rect class="vb-box" x="790.0" y="240.0" width="290.0" height="96.0" rx="10"/><circle class="dot-neo" cx="810.0" cy="265.0" r="5.5"/>
+<text class="vb-name" x="823" y="270">Neocities</text>
+<rect class="vb-badge" x="958" y="251" width="110" height="20" rx="10"/><text class="vb-badge-tx" x="1013" y="265" text-anchor="middle">T2 · out 2/3</text>
+<text class="vb-url" x="804" y="292">japanese-wabi-sabi-lighting.neocities.org</text>
+<text class="vb-meta" x="804" y="312">Japanese · Japandi · Nordic wabi-sabi</text>
+<rect class="vb-box" x="790.0" y="700.0" width="290.0" height="96.0" rx="10"/><circle class="dot-neo" cx="810.0" cy="725.0" r="5.5"/>
+<text class="vb-name" x="823" y="730">Neocities</text>
+<rect class="vb-badge" x="958" y="711" width="110" height="20" rx="10"/><text class="vb-badge-tx" x="1013" y="725" text-anchor="middle">T2 · out 2/3</text>
+<text class="vb-url" x="804" y="752">wabi-sabi-ceiling-lights.neocities.org</text>
+<text class="vb-meta" x="804" y="772">ceiling vs pendant · cylinder · cách treo</text>
+<rect class="vb-box" x="320.0" y="700.0" width="290.0" height="96.0" rx="10"/><circle class="dot-neo" cx="340.0" cy="725.0" r="5.5"/>
+<text class="vb-name" x="353" y="730">Neocities</text>
+<rect class="vb-badge" x="488" y="711" width="110" height="20" rx="10"/><text class="vb-badge-tx" x="543" y="725" text-anchor="middle">T2 · out 2/3</text>
+<text class="vb-url" x="334" y="752">wabi-sabi-bamboo-lights.neocities.org</text>
+<text class="vb-meta" x="334" y="772">bamboo fixture · hanging · ceiling · pendant</text>
+<rect class="vb-box" x="545.0" y="460.0" width="310.0" height="120.0" rx="10" style="stroke-width:2.6"/><circle class="dot-neo" cx="565.0" cy="487.0" r="5.5"/>
+<text class="vb-name" x="578" y="492">NÚT GIỮA</text>
+<text class="vb-url" x="559" y="514">wabisabipendantlights.neocities.org</text>
+<text class="vb-meta" x="559" y="536">T1 buffer · hub + tool Style Quiz</text>
+<text class="vb-meta" x="559" y="557">10–20 bài · out 1/3 · 1 link money</text>
+<rect class="vb-badge" x="743" y="471" width="100" height="20" rx="10"/><text class="vb-badge-tx" x="793" y="485" text-anchor="middle">không nhận T3</text>
+<rect class="dr-badge" x="797" y="554" width="46" height="20" rx="10"/><text class="dr-tx" x="820" y="568" text-anchor="middle">DR —</text>
+<rect class="vb-box vb-box--money" x="1220.0" y="460.0" width="330.0" height="120.0" rx="10"/>
+<text class="vb-mname" x="1234" y="490">/collections/wabi-sabi-pendant-lights/</text>
+<text class="vb-meta" x="1234" y="512">indochinalight.com · 1 link vào</text>
+<text class="vb-mmeta" x="1234" y="532">30 từ · 9 từ ở 6–16 · head “wabi sabi pendant light”</text>
+<text class="vb-mmeta" x="1234" y="547">(400 vol) ngoài top 100 · ♻ 11 link (2 dofollow)</text>
+<text class="vb-mmeta" x="1234" y="562">trang đối thủ thắng 0–3 RD · mô hình TAS nuôi thêm</text>
+<rect class="vb-box vb-box--src" x="30.0" y="250.0" width="230.0" height="74.0" rx="10"/>
+<text class="vb-name" x="44" y="283">PBN</text>
+<text class="vb-meta" x="44" y="303">mua ngoài · chỉ bắn vòng ngoài</text>
+<rect class="vb-box vb-box--src" x="30.0" y="710.0" width="230.0" height="74.0" rx="10"/>
+<text class="vb-name" x="44" y="743">GSA</text>
+<text class="vb-meta" x="44" y="763">chỉ bắn vòng ngoài</text>
+<rect class="vb-box vb-box--src" x="1170.0" y="744.0" width="290.0" height="62.0" rx="10"/>
+<text class="vb-name" x="1184" y="771">Blog comment</text>
+<text class="vb-meta" x="1184" y="791">high Trust Flow · chỉ bắn vòng ngoài</text>
+<rect class="vb-box vb-box--src" x="1093.0" y="138.0" width="290.0" height="62.0" rx="10"/>
+<text class="vb-name" x="1107" y="165">Blog comment</text>
+<text class="vb-meta" x="1107" y="185">high Trust Flow · chỉ bắn vòng ngoài</text>
+<rect class="vb-box vb-box--src" x="210.0" y="478.5" width="230.0" height="74.0" rx="10"/>
+<text class="vb-name" x="224" y="512">150 link profile</text>
+<text class="vb-meta" x="224" y="532">social · UGC · GG property</text>
+<rect class="vb-box vb-box--bao" x="213.5" y="567.0" width="223.0" height="86.0" rx="10"/><circle cx="233.5" cy="591.0" r="5.5" fill="#9673a6"/>
+<text class="vb-name" x="246" y="596">Bài báo buffer</text>
+<text class="vb-url" x="228" y="614">tạp chí decor EN</text>
+<text class="vb-meta" x="228" y="629">Japandi / natural interiors</text>
+<text class="vb-meta" x="228" y="643">đã index · gần seed</text>
+</svg>
+    </div>
+    <p class="scroll-hint">↔ Cuộn ngang để xem hết sơ đồ · bố cục giữ theo bản vẽ trên diagrams.net (trang “08 method → wabi-sabi”).</p>
+    <ul class="legend"><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-back" x1="1" y1="7" x2="37" y2="7"/><path class="ah-navy" d="M37,2.5 L45,7 L37,11.5 Z"/></svg><span><b>Link về money site</b> — 1 link duy nhất, từ nút giữa</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-chain" x1="1" y1="7" x2="37" y2="7"/><path class="ah-accent" d="M37,2.5 L45,7 L37,11.5 Z"/></svg><span><b>Link vòng</b> — 8 link trên cùng neocities.org: vòng 1 → 2 → 3 → 4 → 1 và 4 nút → nút giữa</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-int" x1="1" y1="7" x2="37" y2="7"/><path class="ah-muted" d="M37,2.5 L45,7 L37,11.5 Z"/></svg><span><b>Nguồn đẩy</b> — PBN, GSA, 2 blog comment vào vòng ngoài · 150 link profile vào nút giữa</span></li><li><svg width="46" height="14" aria-hidden="true" focusable="false"><line class="lg-bao" x1="1" y1="7" x2="37" y2="7"/><path d="M37,2.5 L45,7 L37,11.5 Z" fill="#9673a6"/></svg><span><b>Mắt xích báo</b> — bài báo buffer → nút giữa</span></li></ul>
+  </section>
+</main>
+</body>
+</html>
